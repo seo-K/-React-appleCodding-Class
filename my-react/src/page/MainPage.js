@@ -1,5 +1,5 @@
 import Header from '../component/Header';
-import Content from '../component/Content';
+import Main from '../component/Main';
 import Footer from '../component/Footer';
 
 export default function MainPage(){
@@ -7,7 +7,7 @@ export default function MainPage(){
   return (
       <>
           <Header></Header>
-          {/* <Content></Content> */}
+          <Main></Main>
           <Footer></Footer>
         </>
   );

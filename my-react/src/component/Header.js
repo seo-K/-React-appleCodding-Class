@@ -95,6 +95,7 @@ const Wrap = styled.div`
  `
 
 const Title = styled.h1`
+    font-family: "Charmon";
     position: absolute;
     top: 50%;
     right: calc( 100vw * (50 / 1920));
@@ -102,7 +103,7 @@ const Title = styled.h1`
 
     text-align: right;
 
-    color:#fff;
+    color:#000;
     text-align: center;
     font-size: calc( 100vw * (35 / 1920));
     text-shadow: 1px 1px 3px,0 0 10px rgba(0,0,0,0.5);;
@@ -129,11 +130,12 @@ const StyledLink = styled(Link)`
     transition: all 0.3s;
     box-sizing: border-box;
 
-${({active}) => {
-    return active?
-    `color: salmon;`
-    :
-    `color: #fff;`
-}}
-
+    &:hover {
+    background-color: black
+  }
 `
+
+// 태그 타입 styled 함수 인자로 전달
+// const MyInput = styled('input')`
+//   background:gray;
+// `

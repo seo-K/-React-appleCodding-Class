@@ -1,11 +1,14 @@
 //링크 사용할때!
 import {Link} from "react-router-dom";
 import { useState, useEffect } from 'react';
+// import { IconContext } from 'react-icons';
 
 //css
 import styled from "styled-components";
 import HeaderBg from '../img/main_img02.png';
-
+import menuBar from '../img/menu_bar.png';
+// import menuBar2 from '../img/menu_bar_2.png';
+import closeBtn from '../img/close_btn.png';
 
 
 export default function Header(){
@@ -37,6 +40,7 @@ export default function Header(){
     ]);
   }, [])
 
+  
     return(
         <>
         <Wrap>
@@ -68,6 +72,10 @@ export default function Header(){
             </Gnb> */}
 
             {/* (3) useEffect */}
+            <btnWrap>
+                <MobMenuBar></MobMenuBar>
+                <MobcloseBtn></MobcloseBtn>
+            </btnWrap>
             <Gnb>
             {
             data.map((item, index) => {
@@ -83,15 +91,48 @@ export default function Header(){
  }
 
 //Head
+const btnWrap = styled.div`
+    
+
+ img{
+    position: fixed;
+    top:0;
+    right:0;
+
+    width: calc( 100vw * (50 / 1920));
+    height: calc( 100vw * (50 / 1920));
+
+    z-index: 20;
+ }
+`
+
+const MobMenuBar = styled.img.attrs({
+    src: menuBar,
+  })`
+    /* width:calc( 100vw * (50 / 1920)); */
+    /* height:calc( 100vw * (50 / 1920)); */
+  `
+  
+const MobcloseBtn = styled.img.attrs({
+    src: closeBtn,
+  })`
+    /* width:calc( 100vw * (50 / 1920)); */
+    /* height:calc( 100vw * (50 / 1920)); */
+`
 
 const Wrap = styled.div`
     position: relative;
-    width: calc( 100vw * (960 / 1920));
+    /* width: calc( 100vw * (960 / 1920)); */
     height: calc( 100vw * (400 / 1920));
-    margin:0 auto;
+    /* margin:0 auto; */
     border-bottom: 1px solid pink;
 
     background: url(${HeaderBg}) no-repeat center center / cover;
+
+    @media screen and (max-width: 1024px) and (min-width: 640px) {
+    width: 100%;
+    height:calc( 100vw * (400 / 1920));
+  }
  `
 
 const Title = styled.h1`
@@ -106,7 +147,13 @@ const Title = styled.h1`
     color:#000;
     text-align: center;
     font-size: calc( 100vw * (35 / 1920));
-    text-shadow: 1px 1px 3px,0 0 10px rgba(0,0,0,0.5);;
+    text-shadow: 1px 1px 3px,0 0 10px rgba(0,0,0,0.5);
+
+    @media screen and (max-width: 1024px) and (min-width: 640px) {
+        font-size: calc( 100vw * (50 / 1920));
+    }
+    @media(max-width: 640px){
+    }
 `
 const Gnb = styled.nav`
     position: absolute;
@@ -118,6 +165,13 @@ const Gnb = styled.nav`
 
     height: calc( 100vw * (50 / 1920));
     line-height: calc( 100vw * (50 / 1920));
+
+    @media screen and (max-width: 1024px) and (min-width: 640px) {
+        height: calc( 100vw * (80 / 1920));
+    line-height: calc( 100vw * (80 / 1920));
+    }
+    @media(max-width: 640px){
+    }
 `
 const StyledLink = styled(Link)`
     display: block;
@@ -131,7 +185,8 @@ const StyledLink = styled(Link)`
     box-sizing: border-box;
 
     &:hover {
-    background-color: black
+    background-color: rgba(0,0,0,.4);
+    padding-right: 25px;
   }
 `
 

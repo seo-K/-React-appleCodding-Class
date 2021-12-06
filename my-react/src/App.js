@@ -5,12 +5,16 @@ import "./App.css" //기본 reset 파일
 import MainPage from './page/MainPage';
 import SubPage from './page/SubPage';
 
+// 애플코딩 공부
+import Apple from './page/Apple'
+
 export default function App(){
 
   return (
       <Router>
           <Route exact path="/" component={MainPage}/>
           <Route exact path="/sub" component={SubPage}/>
+          <Route exact path="/apple" component={Apple}/>
       </Router>
 
     );

@@ -1,34 +1,26 @@
 import { useState, useEffect } from 'react';
 
-// page
-import Header from '../component/Header';
-import Main from '../component/Main';
-import Footer from '../component/Footer';
-
 import styled from "styled-components";
 
 export default function MainPage(){
 
     // 1. 게시글명
-    const [글제목, 글제목변경] = useState(['남자코트 추천', '강남 우동맛집', '파이썬독학']);
+    const [글제목, 글제목변경] = useState(['강남 맛집 이다', '열심히 배운다', '리액트 마스터']);
 
     // 2. 초기 좋아요값
     let [하트, 하트변경] = useState([0,0,0]);       
 
     // 3. 모달
-    const [modalShow,setModalShow] = useState(false)
+    const [modalShow,setModalShow] = useState(false);
 
-    // function 반복된UI(){
-
-
-    //     return 
-    // }
+    // 4. 누른 제목
+    let [누른제목, 누른제목변경] = useState([0]);
 
 
     function 글제목바꾸기(){
         var newArray = [...글제목];
 
-        newArray[0] = "여자코트 추천";
+        newArray[0] = "또다른 글제목";
         글제목변경(newArray);
     }
 
@@ -44,7 +36,7 @@ export default function MainPage(){
         하트카피[index]++;
         하트변경(하트카피);
 
-        console.log(하트카피)
+        console.log(하트카피);
     }
 
 
@@ -62,11 +54,10 @@ export default function MainPage(){
         <Button onClick={ 글순서바꾸기 }>순서버튼</Button>
         {
             // 글i = 파라미터 하나하나의 파라미터에 값이 보임.
-            글제목.map(function(글,index){
+            글제목.map(function(item,index){
                 return(
-                <List key={index}>
-                    {/* <h3>{글}<Good onClick={() => {하트변경( 하트 + 1)} } >😍</Good> {하트[index]} </h3> */}
-                    <h3>{글}<Good onClick={ () => {하트플러스(index)} } >😍</Good> {하트[index]} </h3>
+                <List key={index} onClick={() => {누른제목변경(index)}}>
+                    <h3>{item}<Good onClick={ () => {하트플러스(index)} } >😍</Good> {하트[index]} </h3>
                     <p>12월 12일 발행</p>
                     <hr/>
                 </List>
@@ -75,10 +66,19 @@ export default function MainPage(){
         }
        
     
+        <Button onClick={ () => { 누른제목변경(0);setModalShow(true)} }>버튼1</Button>
+        <Button onClick={ () => { 누른제목변경(1);setModalShow(true)} }>버튼2</Button>
+        <Button onClick={ () => { 누른제목변경(2);setModalShow(true)} }>버튼3</Button>
+
         <Button onClick={() => {setModalShow(!modalShow)}}>모달창 버튼</Button>
+        {/* <Button onClick={() => {setModalShow(true)}}>모달창 버튼</Button> */}
         {
-            modalShow ?
-            <Modal 글제목변경={글제목변경}/>
+            modalShow === true
+            ?
+            // <Modal 작명={전송할 state}/>
+            // <Modal 글제목변경={글제목변경}/>
+            <Modal 글제목={글제목} 누른제목={누른제목}/>
+            
             :
             null
         }
@@ -87,10 +87,12 @@ export default function MainPage(){
       
 }
 
-function Modal({글제목변경}){
+function Modal(props){
+    // function Modal({글제목변경}){
     return (
         <ModalWrap>
-            <h3>글제목 : {글제목변경[1]}</h3>
+            <h3>글제목 :{ props.글제목[props.누른제목] }</h3>
+            {/* <h3>글제목 : {글제목변경[1]}</h3> */}
             <p>날짜</p>
             <p>상세내용</p>
         </ModalWrap>
@@ -128,6 +130,8 @@ const Button = styled.button`
     margin:20px auto;
     border: 1px solid #999;;
     border-radius: 10px;
+
+    padding: 5px 0;
 
     &:hover{
         color:#fff;

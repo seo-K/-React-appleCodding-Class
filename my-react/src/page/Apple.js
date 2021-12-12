@@ -99,7 +99,7 @@ export default function MainPage(){
         <Button onClick={() => {setModalShow(!modalShow)}}>모달창 버튼</Button>
         {
             modalShow ?
-            <Modal 글제목변경={글제목변경}/>
+            <Modal 글제목={글제목}/>
             :
             null
         }

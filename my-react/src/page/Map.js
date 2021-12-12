@@ -10,32 +10,22 @@ import styled from "styled-components";
 export default function MainPage(){
 
     // 1. 게시글명
-    // const 글리스트 = {
-    //     [
-    //         title:'',
-    //         date: '',
-    //     ]
-    // }
     const [글제목, 글제목변경] = useState(['남자코트 추천', '강남 우동맛집', '파이썬독학']);
+
     // 2. 초기 좋아요값
-    let [하트, 하트변경] = useState(0)
+    let [하트, 하트변경] = useState([0,0,0]);       
+
     // 3. 모달
     const [modalShow,setModalShow] = useState(false)
 
-    function 반복된UI(){
+    // function 반복된UI(){
 
 
-        return 
-    }
+    //     return 
+    // }
 
 
     function 글제목바꾸기(){
-        // 1. 하드코딩
-        // 글제목변경(['여자코트 추천', '경기 우동맛집', '리액트독학']);
-
-        // 2. 깔끔코딩
-        //데이터가 100개가 될 수 있으므로 복사해서 사용
-        // var newArray = 글제목에 있던 0번째 데이터를 여자 코트 추천으로 바꿈
         var newArray = [...글제목];
 
         newArray[0] = "여자코트 추천";
@@ -43,41 +33,20 @@ export default function MainPage(){
     }
 
     function 글순서바꾸기(){
-        // 1.하드코딩
-        // 글제목변경(['경기 우동맛집','리액트독학','여자코트 추천'])
-
-        // 2. 깔끔코딩
         var twoNewArray = [...글제목];
-
-        // 1) 가다나순 정렬
         twoNewArray.sort();
-
-        // 2) 얘는 얘로 정렬
-        // twoNewArray[0] = twoNewArray[1];
-        // twoNewArray[1] = twoNewArray[2];
-        // twoNewArray[2] = twoNewArray[0];
 
         글제목변경(twoNewArray);
     }
 
+    function 하트플러스(index) {
+        const 하트카피 = [...하트];
+        하트카피[index]++;
+        하트변경(하트카피);
 
-    // function 개인하트변경(){
-    //     let i = 하트변경.index();
-    //     console.log(i)
-    //     let copy = [...하트];
-    //     copy[i]++;
-    //     하트변경(copy);
-    // }
-
-
-    // 모달 보이기 함수로 만들기
-    function ShowModal(){
-        // 1.모달 보이게
-        // setModalShow(true)
-
-        // 2. 모달이 true일땐 false로 / false 일땐 true로 토글
-        setModalShow(!modalShow)
+        console.log(하트카피)
     }
+
 
   return (
       <Container>
@@ -95,8 +64,9 @@ export default function MainPage(){
             // 글i = 파라미터 하나하나의 파라미터에 값이 보임.
             글제목.map(function(글,index){
                 return(
-                <List>
-                    <h3>{글}<Good onClick={ () => { 하트변경 (하트 + 1) }} >😍</Good> {하트} </h3>
+                <List key={index}>
+                    {/* <h3>{글}<Good onClick={() => {하트변경( 하트 + 1)} } >😍</Good> {하트[index]} </h3> */}
+                    <h3>{글}<Good onClick={ () => {하트플러스(index)} } >😍</Good> {하트[index]} </h3>
                     <p>12월 12일 발행</p>
                     <hr/>
                 </List>

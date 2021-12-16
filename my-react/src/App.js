@@ -8,6 +8,7 @@ import SubPage from './page/SubPage';
 // 애플코딩 공부
 import Apple from './page/Apple'
 import Map from './page/Map'
+import Study from './page/Study'
 
 export default function App(){
 
@@ -17,6 +18,7 @@ export default function App(){
           <Route exact path="/sub" component={SubPage}/>
           <Route exact path="/apple" component={Apple}/>
           <Route exact path="/apple/map" component={Map}/>
+          <Route exact path="/study" component={Study}/>
       </Router>
 
     );

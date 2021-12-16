@@ -36,7 +36,7 @@ export default function Header(){
         {list:"Reservation",
         path:"/apple"},
         {list:"Customer",
-        path:"/sub"},
+        path:"/study"},
     ]);
   }, [])
 

@@ -16,6 +16,9 @@ export default function MainPage(){
     // 4. 누른 제목
     let [누른제목, 누른제목변경] = useState([0]);
 
+    // 5. 저장공간
+    let [입력값, 입력값변경] = useState('');
+
 
     function 글제목바꾸기(){
         var newArray = [...글제목];
@@ -39,6 +42,15 @@ export default function MainPage(){
         console.log(하트카피);
     }
 
+    function 글추가(index){
+        const newArray = [...글제목],
+              newInput =[...입력값];
+        
+        newArray[index] = newInput;
+        
+        글제목변경(newArray);
+
+    }
 
   return (
       <Container>
@@ -64,6 +76,25 @@ export default function MainPage(){
                 )
             })
         }
+
+        <InputWrap>
+            {/* onChange 뭔가 입력될대 안의 함수가 실행됨 */}
+            {/* <Input onChange={(e)=> {입력값변경(e.target.value)}} /> */}
+            <Input onChange={(e)=> {입력값변경(e.target.value)}} />
+            {/* <InputBtn onClick={(e)=> {글추가(e)}}>발행</InputBtn> */}
+
+            {/* 1. 생코딩 */}
+            {/* <InputBtn onClick={()=> {
+                글제목변경( [입력값, '강남 맛집 이다', '열심히 배운다', '리액트 마스터' ]);
+            }}>발행</InputBtn> */}
+            {/* 1. 생코딩 */}
+            <InputBtn onClick={()=> {
+                // 맨 앞에 자리를 추가(append)해주세요
+                var newArray = [...글제목];
+                newArray.unshift(입력값);
+                글제목변경(newArray);
+            }}>발행</InputBtn>
+        </InputWrap>
        
     
         <Button onClick={ () => { 누른제목변경(0);setModalShow(true)} }>버튼1</Button>
@@ -103,6 +134,7 @@ const Container = styled.div`
     position: relative;
 
     width: 100%;
+    
 `
 
 const BlackBg = styled.div`
@@ -160,4 +192,31 @@ const ModalWrap = styled.div`
     margin-top: calc( 100vw * (20 / 1920));
 
     text-align:center;
+`
+
+const InputWrap = styled.div`
+    position: relative;
+    width:100%;
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    padding: 50px 0;
+`
+
+const Input = styled.input`
+    border: 1px solid blue;
+    border-radius: 10px;
+
+    width:400px;
+    color:#111;
+    padding: 10px;
+`
+const InputBtn = styled.p`
+    border: 1px solid blue;
+    border-radius: 10px;
+
+    width:100px;
+    text-align: center;
+    background: #555;
+    margin-left:10px;
 `

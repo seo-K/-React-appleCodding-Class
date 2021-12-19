@@ -1,93 +1,93 @@
-import Header from '../component/Header';
-import Main from '../component/Main';
-import Footer from '../component/Footer';
 
 import styled from "styled-components";
 import { useState } from 'react';
 
 export default function Study(){
 
-  const [제목, 제목변경] = useState(['서영이는 공부잘해', '서영이는 짱이야']);
-  const [list, setList] = useState(['차차','리액트도 잘해','html도잘해','스크립트도 잘할거야']);
+const [list,setList]= useState(['코딩공부열시미','리액트도열시미','나눈짱']);
+const [like,setLike]= useState(['0','0','0']);
+const [showPopup, setShowPopup] = useState(false);
+const [clickTitle, setClickTitle] = useState([0]);
 
-  const [modalShow, setModalShow] = useState(false);
+function 이름바꾸기() {
+  var newArray = [...list];
 
-  function 제목변경함수() {
-      var arrayCopy = [...제목];
+  newArray[2] = '나는짱';
 
-      arrayCopy[0] = "제목을 변경한다";
-
-
-      제목변경(arrayCopy)
-  }
-  function 제목순서변경함수() {
-      var arrayCopy = [...list];
-
-      arrayCopy.sort();
+  setList(newArray)
+}
 
 
-      setList(arrayCopy)
-  }
+function 가나다변경() {
+  var newArray = [...list];
 
-  // 4. 누른 제목
-  let [누른제목, 누른제목변경] = useState([0]);
+  newArray.sort();
 
-  const [좋아요, 좋아요변경] = useState([0,0,0,0]);     
+  setList(newArray)
+}
 
-  function 하트플러스(index){
-    var newLike = [...좋아요];
-    newLike[index]++;
-    좋아요변경(newLike);
-  }
+function 좋아요변경(index) {
+  var newArray = [...like];
+
+  newArray[index]++;
+
+  setLike(newArray);
+
+}
+
+// function 누른제목가져오기(index){
+//   setClickTitle(clickTitle[index]);
+// }
 
 
   return (
       <Wrap>
-          <Title onClick={제목변경함수}>{제목[0]}</Title>
-          <BoardWrap>
-            {
-              list.map((item, index)=> {
-                return(
-                  <BorderList key={index}>
-                    <h3>{item}</h3>
-                    <p>글리스트</p>
-                    <p onClick={()=> {하트플러스(index)}}>★{좋아요[index]}</p>
-                    <Button onClick={() => {setModalShow(true);누른제목변경(index)}}>팝업버튼</Button>
-                  </BorderList>
-                )
-              })
-            }
-           
-          </BoardWrap>
-          <ModalButton onClick={제목순서변경함수}>가나다 순</ModalButton>
-          <ModalButton onClick={()=> {setModalShow(!modalShow)}}>나와라 팝업</ModalButton>
-          {
-            modalShow === true ?
-            <Modal list={list} modalShow={modalShow} 누른제목={누른제목}/>
-            :
-            null
-          }
+         <Title>서영이짱</Title>
+         <BoardWrap>
+           {
+             list.map((item, index) => {
+               return(
+                 <BorderList key={index}>
+                   <Title>{item}</Title>
+                   <Desc>잘하고있음</Desc>
+                   <p onClick={() => {좋아요변경(index)}}>♥{like[index]}</p>
+                   <Button  onClick={() => {setShowPopup(true);setClickTitle(index)}}>팝업이름바꿔서 노출</Button>
+                 </BorderList>
+               )
+             })
+           }
+         </BoardWrap>
+         <Button onClick={가나다변경}>가나다순</Button>
+         <Button onClick={이름바꾸기}>그냥 얘 이름바꾸기</Button>
+         <Button onClick={() => setShowPopup(!showPopup)}>나와라 팝업</Button>
+         {
+           showPopup?
+           <Popup setShowPopup={setShowPopup} clickTitle={clickTitle} list={list}/>
+           :
+           null
+         }
       </Wrap>
-
   );
 
 }
 
-function Modal(props){
+function Popup(props){
   return(
-        <Screen>
-          {/* <CloseBtn onClick={()=> {setModalShow(false)}}>X</CloseBtn> */}
-          <Title>제목 : {props.list[props.누른제목]}</Title>
-          <Desc>내용 : </Desc>
-        </Screen>
-        )
+    <Screen>
+      <CloseBtn onClick={() => {props.setShowPopup(false)}}>닫기</CloseBtn>
+      <Title>{props.list[props.clickTitle]}</Title>
+      <Desc>팝업 내용입니다.</Desc>
+    </Screen>
+  )
 }
+  
+
 
 const Wrap = styled.div`
     position: relative;
 
 `
-const Title = styled.div`
+const Title = styled.h1`
     padding: 50px 0;
     background: #988;
     color:#fff;
@@ -109,6 +109,10 @@ const BorderList = styled.li`
     
     font-size:20px;
     text-align: center;
+
+    & p{
+      cursor: pointer;
+    }
 `
 const Button = styled.p`
     width:100px;
@@ -118,7 +122,7 @@ const Button = styled.p`
     text-align:center;
     color:#111;
 
-    background: #fff;
+    background: #222;
 
     margin: 30px auto;
     cursor: pointer;
@@ -139,7 +143,7 @@ const Screen = styled.div`
     margin: auto;
     width:500px;
     height:500px;
-    background: #fff;
+    background: #111;
 
     border-radius:10px;
 

@@ -10,15 +10,23 @@ import Apple from './page/Apple'
 import Map from './page/Map'
 import Study from './page/Study'
 
+
+// shopping mall
+import Shop from './page/Shop'
+
 export default function App(){
 
   return (
       <Router>
+        {/* 잘 놀았다 */}
           <Route exact path="/" component={MainPage}/>
           <Route exact path="/sub" component={SubPage}/>
           <Route exact path="/apple" component={Apple}/>
           <Route exact path="/apple/map" component={Map}/>
           <Route exact path="/study" component={Study}/>
+
+          {/* 쇼핑몰 */}
+          <Route exact path="/shop" component={Shop}/>
       </Router>
 
     );

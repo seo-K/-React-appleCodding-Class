@@ -44,7 +44,7 @@ export default function Header(){
     return(
         <>
         <Wrap>
-            <Title><a href="index.html">Nature Skin</a></Title>
+            <Title><Link to="/shop">Nature Skin</Link></Title>
             {/* 이미지넣는 2가지 방법 */}
             {/* 위에서 import 한 후  import HeaderBg from '../img/main_img02.png';*/}
             {/* return 부분에 <img src={HeaderBg} alt="Logo" />;*/}

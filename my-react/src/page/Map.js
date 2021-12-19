@@ -134,6 +134,7 @@ function Modal(props){
 
 // 옛날 리액트
 class Profile extends React.Component {
+    // constructor class 의 변수/초기값 저장할때 쓰는 것
     constructor(){
       super();
       this.state = { name : 'Kim', age : 30 }

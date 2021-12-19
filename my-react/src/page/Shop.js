@@ -32,25 +32,75 @@ export default function Shop(){
             <p>Lorem</p>
             <Button>버튼</Button>
         </BigBox>
+        {/* 1. 애플코딩 */}
+        {/* <div className="container">
+            <div className="row">
+                <Card shoes={shoes[0]}/>
+                <Card shoes={shoes[1]}/>
+                <Card shoes={shoes[2]}/>
+            </div>
+        </div> */}
+
+
+         {/* 2. 애플코딩 Map*/}
         <div className="container">
             <div className="row">
                 {
-                    shoes.map((item, index)=> {
+                    shoes.map((item, index) => {
                         return(
-                            <div className="col-md-4" key="index">
-                            <img src="https://codingapple1.github.io/shop/shoes1.jpg" alt="이미지1"/>
-                            <h3>{item.title}</h3>
-                            <p>{item.content}</p>
-                            <p>{item.price}</p>
-                        </div>
+                            <Card shoes={shoes[index]} index={index} key={index}/>
+                            // <Card shoes={item}/>
                         )
                     })
                 }
             </div>
         </div>
+
+        {/* 3. 내방식 */}
+        {/* <div className="container">
+            <div className="row">
+                {
+                    <Card shoes={shoes}/>
+                }
+            </div>
+        </div> */}
       </>
   );
       
+}
+
+function Card(props){
+    return(
+        
+        // 1. 애플코딩 
+        // <div className="col-md-4" key="index">
+        //     <ImgWrap>
+        //         <CardImg src="https://codingapple1.github.io/shop/shoes1.jpg" alt="이미지1"/>
+        //     </ImgWrap>
+        //     <h3>{props.shoes.title}</h3>
+        //     <p>{props.shoes.content} &amp; {props.shoes.price}</p>
+        // </div>
+        // 2. 애플코딩 Map
+        <div className="col-md-4" key="index">
+            <ImgWrap>
+                <CardImg src={'https://codingapple1.github.io/shop/shoes' + (props.index + 1) + '.jpg'} alt="이미지1"/>
+            </ImgWrap>
+            <h3>{props.shoes.title}</h3>
+            <p>{props.shoes.content} &amp; {props.shoes.price}</p>
+        </div>
+        //  2. 내방식 
+        // props.shoes.map((item, index)=> {
+        //     return(
+        //             <div className="col-md-4" key="index">
+        //                 <ImgWrap>
+        //                     <CardImg src="https://codingapple1.github.io/shop/shoes1.jpg" alt="이미지1"/>
+        //                 </ImgWrap>
+        //                 <h3>{item.title}</h3>
+        //                 <p>{item.content} &amp; {item.price}</p>
+        //             </div>
+        //     )
+        // })
+    )
 }
 
 
@@ -95,5 +145,23 @@ const Button = styled.p`
     &:hover{
         background: #333;
         color:#fff;
+    }
+`
+const ImgWrap = styled.div`
+    width:100%;
+    height:100%;
+
+    cursor: pointer;
+
+    overflow: hidden;
+`
+const CardImg = styled.img`
+    width:100%;
+    height:100%;
+
+    transition: all .2s;
+
+    &:hover{
+        transform: scale(1.1);
     }
 `

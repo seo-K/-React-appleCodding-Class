@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styled from "styled-components";
 
@@ -113,6 +113,8 @@ export default function MainPage(){
             :
             null
         }
+
+        <Profile/>
       </Container>
   );
       
@@ -129,6 +131,35 @@ function Modal(props){
         </ModalWrap>
     )
 }
+
+// 옛날 리액트
+class Profile extends React.Component {
+    constructor(){
+      super();
+      this.state = { name : 'Kim', age : 30 }
+    }
+
+    changeName = () => {
+        this.setState ( { name: 'Park' } )
+    }
+  
+    render(){
+      return (
+        <div>
+            <h3>프로필</h3>
+            <p>저는 {this.state.name} 입니다. </p>
+            {/* 1. 단순코딩 */}
+            {/* <Button onClick={ () => { this.setState ( { name: 'Park' } ) }}>버튼</Button> */}
+            {/* 2. 함수코딩 */}
+            {/* bind = this 값이 예민한 리액트... 그래서 bind로 this 잘 찾게 해주기 */}
+            {/* <Button onClick={ this.changeName.bind(this) }>버튼</Button> */}
+            {/* 3. bind(this) 쓰기싫으면 위 함수선언에서 화살표함수 사용  */}
+            <Button onClick={ this.changeName }>버튼</Button>
+        </div>
+      )
+    }
+  }
+
 
 const Container = styled.div`
     position: relative;

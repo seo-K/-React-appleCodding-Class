@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
+import { BrowserRouter as Router, Route, Switch, Link} from "react-router-dom";
+import styled from "styled-components";
 
 // page
 import Data from './Data';
+import Detail from './Detail';
 // import {name, name2} from './Data';
 
-import styled from "styled-components";
-import { Link } from 'react-router-dom';
+
 
 
 import Bg from '../img/main_img.jpg';
@@ -21,8 +23,8 @@ export default function Shop(){
             <Container>
             <Navbar.Brand href="#home">ShoppingMall</Navbar.Brand>
             <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link><Link to='/shop'>Home</Link></Nav.Link>
+            <Nav.Link><Link to='/detail'>Detail</Link></Nav.Link>
             <Nav.Link href="#pricing">Pricing</Nav.Link>
             </Nav>
             </Container>
@@ -32,22 +34,14 @@ export default function Shop(){
             <p>Lorem</p>
             <Button>버튼</Button>
         </BigBox>
-        {/* 1. 애플코딩 */}
-        {/* <div className="container">
-            <div className="row">
-                <Card shoes={shoes[0]}/>
-                <Card shoes={shoes[1]}/>
-                <Card shoes={shoes[2]}/>
-            </div>
-        </div> */}
 
-
-         {/* 2. 애플코딩 Map*/}
+         {/* 1-1. 애플코딩 Map*/}
         <div className="container">
             <div className="row">
                 {
                     shoes.map((item, index) => {
                         return(
+                            // <Card onClick={() = > {}} shoes={shoes[index]} index={index} key={index}/>
                             <Card shoes={shoes[index]} index={index} key={index}/>
                             // <Card shoes={item}/>
                         )
@@ -56,14 +50,31 @@ export default function Shop(){
             </div>
         </div>
 
-        {/* 3. 내방식 */}
+        {/* 1-2. 애플코딩 */}
+        {/* <div className="container">
+            <div className="row">
+                <Card shoes={shoes[0]}/>
+                <Card shoes={shoes[1]}/>
+                <Card shoes={shoes[2]}/>
+            </div>
+        </div> */}
+
+        {/* 2. 내방식 */}
         {/* <div className="container">
             <div className="row">
                 {
                     <Card shoes={shoes}/>
                 }
             </div>
-        </div> */}
+        </div> */}/:id
+
+{/* 
+        <Switch>
+            <Route path="/detail">
+                <Detail shoes={shoes}/>
+            </Route>
+        </Switch> */}
+           
       </>
   );
       
@@ -71,16 +82,8 @@ export default function Shop(){
 
 function Card(props){
     return(
-        
-        // 1. 애플코딩 
-        // <div className="col-md-4" key="index">
-        //     <ImgWrap>
-        //         <CardImg src="https://codingapple1.github.io/shop/shoes1.jpg" alt="이미지1"/>
-        //     </ImgWrap>
-        //     <h3>{props.shoes.title}</h3>
-        //     <p>{props.shoes.content} &amp; {props.shoes.price}</p>
-        // </div>
-        // 2. 애플코딩 Map
+
+        // 1-1. 애플코딩 Map
         <div className="col-md-4" key="index">
             <ImgWrap>
                 <CardImg src={'https://codingapple1.github.io/shop/shoes' + (props.index + 1) + '.jpg'} alt="이미지1"/>
@@ -88,6 +91,16 @@ function Card(props){
             <h3>{props.shoes.title}</h3>
             <p>{props.shoes.content} &amp; {props.shoes.price}</p>
         </div>
+
+        // 1-2. 애플코딩 
+        // <div className="col-md-4" key="index">
+        //     <ImgWrap>
+        //         <CardImg src="https://codingapple1.github.io/shop/shoes1.jpg" alt="이미지1"/>
+        //     </ImgWrap>
+        //     <h3>{props.shoes.title}</h3>
+        //     <p>{props.shoes.content} &amp; {props.shoes.price}</p>
+        // </div>
+
         //  2. 내방식 
         // props.shoes.map((item, index)=> {
         //     return(
@@ -102,6 +115,7 @@ function Card(props){
         // })
     )
 }
+
 
 
 const BigBox = styled.div`
